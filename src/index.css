@@ -1,3 +1,10 @@
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+:root {
+    --color-beige: rgb(251, 245, 228);
+    --color-beige-light: rgb(253, 253, 253);
+    --color-blue: rgb(26, 81, 112);
+    --color-blue-light: rgb(114, 165, 195);
+}
