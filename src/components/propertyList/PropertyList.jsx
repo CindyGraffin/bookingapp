@@ -34,7 +34,7 @@ const PropertyList = () => {
             <div className="property-list-item">
                 <img src="https://images.unsplash.com/photo-1635690280190-0eec6bc587fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80" alt="" className='property-list-img'/>
                 <div className="property-list-titles">
-                    <h1>Villas</h1>
+                    <h1>Cabanes</h1>
                     <h2>79 cabanes</h2>
                 </div>
             </div>
