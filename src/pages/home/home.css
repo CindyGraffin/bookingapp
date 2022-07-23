@@ -1,0 +1,13 @@
+.home__container {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.home-title {
+    width: 1024px;
+    font-size: 20px;
+    color: var(--color-blue);
+}

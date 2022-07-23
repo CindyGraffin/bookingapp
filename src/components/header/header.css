@@ -11,6 +11,9 @@
     max-width: 1024px;
     margin: 20px 0px 100px 0px
 }
+.header__container.list-mode {
+    margin-bottom: 0px;
+}
 
 .header-list {
     display: flex;
@@ -89,6 +92,7 @@
 .date {
     position: absolute;
     top: 50px;
+    z-index: 2;
 }
 
 .options {
@@ -101,6 +105,7 @@
     border-left: solid var(--color-blue-light);
     border-bottom: solid var(--color-blue-light);
     padding: 10px;
+    z-index: 2;
 }
 
 .option-item {

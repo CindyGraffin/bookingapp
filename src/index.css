@@ -6,8 +6,11 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body {
+    background-color: rgb(248, 247, 242);
+}
 :root {
-    --color-beige: rgb(251, 244, 225);
+    --color-beige: rgb(252, 246, 231);
     --color-beige-light: rgb(248, 247, 242);
     --color-beige-light-transparent: rgba(248, 247, 242, 0.766);
     --color-blue: rgb(26, 81, 112);
