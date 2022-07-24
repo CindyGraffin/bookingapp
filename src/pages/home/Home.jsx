@@ -1,4 +1,4 @@
-import { Navbar, Header, Featured, PropertyList, LovedProperties, MailList } from '../../components/index';
+import { Navbar, Header, Featured, PropertyList, LovedProperties, MailList, Footer } from '../../components/index';
 import './home.css';
 
 const Home = () => {
@@ -13,6 +13,7 @@ const Home = () => {
 				<h1 className='home-title'>Coups de coeur</h1>
 				<LovedProperties/>
 				<MailList/>
+				<Footer/>
 			</div>
 		</div>
 	)
