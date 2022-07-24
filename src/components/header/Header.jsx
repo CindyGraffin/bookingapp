@@ -72,7 +72,7 @@ const Header = ({type}) => {
 				{ type !== "list" && 
 					<div>
 						<h1 className="header-title">
-							Prévoyez le séjour de vos rêves !
+							Réservez le séjour de vos rêves !
 						</h1>
 						<p className="header-desc">
 							Solutions clés en main, récompenses pour vos
