@@ -18,6 +18,8 @@
     border-radius: 10px;
     position: sticky;
     top: 10px;
+    height: max-content;
+    margin-top: 15px;
 }
 
 .list-title {
@@ -28,6 +30,7 @@
 
 .list-result {
     flex: 3;
+    margin-top: 15px;
 }
 
 .list-search-item {

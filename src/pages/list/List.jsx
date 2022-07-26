@@ -1,5 +1,5 @@
 import "./list.css";
-import { Header, Navbar } from "../../components";
+import { Header, Navbar, SearchItem } from "../../components";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { format } from "date-fns";
@@ -104,7 +104,18 @@ const List = () => {
 						</div>
 						<button>Rechercher</button>
 					</div>
-					<div className="list-result"></div>
+					<div className="list-result">
+						<SearchItem/>
+						<SearchItem/>
+						<SearchItem/>
+						<SearchItem/>
+						<SearchItem/>
+						<SearchItem/>
+						<SearchItem/>
+						<SearchItem/>
+						<SearchItem/>
+						<SearchItem/>
+					</div>
 				</div>
 			</div>
 		</div>
