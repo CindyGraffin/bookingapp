@@ -27,6 +27,7 @@ const List = () => {
 						<div className="list-search-item">
 							<label htmlFor="checkIn">Dates de séjour</label>
 							<span
+								className='search-dates'
 								onClick={() => setOpenDate(!openDate)}
 							>{`Du ${format(
 								date[0].startDate,
@@ -46,23 +47,25 @@ const List = () => {
 							)}
 						</div>
 						<div className="list-search-item">
-							<label>Options</label>
+							<label className="list-search-options">Options</label>
 							<div className="list-search-option-item">
 								<span className="list-search-option-text">
-									Min price <small>per night</small>
+									Prix Min <small>par nuit (en €)</small>
 								</span>
 								<input
 									type="number"
-									className="search-option-input"
+									className="list-search-option-input"
+									min={1}
 								/>
 							</div>
 							<div className="list-search-option-item">
 								<span className="list-search-option-text">
-									Max price <small>per night</small>
+									Prix Max <small>par nuit (en €)</small>
 								</span>
 								<input
 									type="number"
-									className="search-option-input"
+									className="list-search-option-input"
+									min={1}
 								/>
 							</div>
 							<div className="list-search-option-item">
@@ -70,8 +73,8 @@ const List = () => {
 									Adultes 
 								</span>
 								<input
-									type="text"
-									className="search-option-input"
+									type="number"
+									className="list-search-option-input"
 									placeholder={options.adults}
 									min={1}
 								/>
@@ -82,7 +85,7 @@ const List = () => {
 								</span>
 								<input
 									type="number"
-									className="search-option-input"
+									className="list-search-option-input"
 									placeholder={options.children}
 									min={0}
 								/>
@@ -93,12 +96,13 @@ const List = () => {
 								</span>
 								<input
 									type="number"
-									// className="search-option-input"
+									className="list-search-option-input"
 									placeholder={options.rooms}
 									min={1}
 								/>
 							</div>
 						</div>
+						<button>Rechercher</button>
 					</div>
 					<div className="list-result"></div>
 				</div>
