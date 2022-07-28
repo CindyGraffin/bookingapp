@@ -1,10 +1,14 @@
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
+import { faCircleArrowLeft, faCircleArrowRight, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Navbar, Header } from "../../components";
+import { useState } from "react";
+import { Navbar, Header, MailList, Footer } from "../../components";
 import './hotel.css';
 
 
 const Hotel = () => {
+	const [slideNumber, setSlideNumber] = useState(0)
+	const [open, setOpen] = useState(true)
 	const photos = [
 		{
 			src: "https://images.unsplash.com/photo-1521783988139-89397d761dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80"
@@ -25,17 +29,31 @@ const Hotel = () => {
 			src: "https://images.unsplash.com/photo-1516681859000-292df1ed3e83?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
 		}		
 	]
+	const handleOpen = (i) => {
+		setSlideNumber(i)
+
+	}
 	return (
 		<div>
 			<Navbar/>
 			<Header type="list"/>
 			<div className="hotel__container">
+				{open && 
+				(<div className="slider">
+					<FontAwesomeIcon icon={faCircleXmark}/>
+					<FontAwesomeIcon icon={faCircleArrowLeft}/>
+					<div className="slide-wrapper">
+						<img src={photos[slideNumber].src} alt="" className="slider-img" />
+					</div>
+					<FontAwesomeIcon icon={faCircleArrowRight}/>
+				</div>)
+				}
 				<div className="hotel-wrapper">
 					<button className="book-now">Réserver maintenant</button>
 					<h1 className="hotel-title">Grand Hotel</h1>
 					<div className="hotel-address">
 						<FontAwesomeIcon icon={faLocationDot}/>
-						<span> Elton St 125, New-York</span>
+						<span>Elton St 125, New-York</span>
 					</div>
 					<span className="hotel-distance">
 						Localisation excellente - A 500m du centre-ville
@@ -47,7 +65,7 @@ const Hotel = () => {
 						{photos.map((photo, i) => {
 							return (
 								<div className="hotel-img-wrapper" key={i}>
-									<img src={photo.src} alt="" className="hotel-img"/>
+									<img src={photo.src} alt="" className="hotel-img" onClick={() => handleOpen(i)}/>
 								</div>
 							)
 						})}
@@ -60,15 +78,17 @@ const Hotel = () => {
 							</p>
 						</div>
 						<div className="hotel-details-price">
-							<h1>Parfait pour un séjour dans la grande ville de New-York !</h1>
+							<h1>Parfait pour un séjour dans la grande ville de New-York</h1>
 							<span>Localisé dans le centre, cet hôtel possède un excellen score de localisation de 9.8 !</span>
 							<h2>
-								<b>1400€ (7 jours)</b>
+								<b>1400€</b> <span className="price-nights">(7 nuits)</span>
 							</h2>
 							<button>Réserver maintenant</button>
 						</div>
 					</div>
 				</div>
+				<MailList/>
+				<Footer/>
 			</div>
 		</div>
 	);

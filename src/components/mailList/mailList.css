@@ -1,6 +1,7 @@
 .mail {
     width: 100%;
     margin-top: 50px;
+    height: 190px;
     background-color: var(--color-blue);
     color: var(--color-beige);
     display: flex;
