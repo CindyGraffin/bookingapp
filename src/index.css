@@ -1,1 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+body {
+    background-color: rgb(248, 247, 242);
+}
+:root {
+    --color-beige: rgb(255, 251, 240);
+    --color-beige-light: rgb(248, 247, 242);
+    --color-beige-light-transparent: rgba(248, 247, 242, 0.766);
+    --color-blue: rgb(26, 81, 112);
+    --color-blue-light: rgb(114, 165, 195);
+}
