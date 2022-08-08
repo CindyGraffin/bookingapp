@@ -8,7 +8,7 @@ import './hotel.css';
 
 const Hotel = () => {
 	const [slideNumber, setSlideNumber] = useState(0)
-	const [open, setOpen] = useState(true)
+	const [open, setOpen] = useState(false)
 	const photos = [
 		{
 			src: "https://images.unsplash.com/photo-1521783988139-89397d761dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80"
