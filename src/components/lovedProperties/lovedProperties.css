@@ -34,12 +34,13 @@
 }
 
 .loved-properties-rating>button {
-    background-color: var(--color-blue);
+    background-color: var(--color-blue-light);
     color: var(--color-beige-light);
     padding: 3px;
     margin-right: 10px;
     border-radius: 5px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .loved-properties-rating>span {
