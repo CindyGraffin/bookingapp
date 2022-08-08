@@ -1,0 +1,31 @@
+.footer {
+    margin-top: -30px;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-beige);
+    display: flex;
+    justify-content: center;
+}
+
+.footer__container {
+    width: 100%;
+    width: 1024px;
+    font-size: 12px;
+    margin-top: 50px;
+}
+
+.footer-lists {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.footer-list {
+    list-style: none;
+}
+
+.footer-list-item {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
