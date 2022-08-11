@@ -27,6 +27,7 @@
 
 .loved-properties-city {
     font-weight: 300;
+    text-transform: capitalize;
 }
 
 .loved-properties-price {
@@ -36,7 +37,7 @@
 .loved-properties-rating>button {
     background-color: var(--color-blue-light);
     color: var(--color-beige-light);
-    padding: 3px;
+    padding: 3px 5px;
     margin-right: 10px;
     border-radius: 5px;
     font-weight: bold;

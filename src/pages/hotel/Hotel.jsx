@@ -2,13 +2,19 @@ import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { faCircleArrowLeft, faCircleArrowRight, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Navbar, Header, MailList, Footer } from "../../components";
+import useFetch from "../../hooks/useFetch";
 import './hotel.css';
 
-
 const Hotel = () => {
+	const location = useLocation()
+	const id = location.pathname.split('/')[2]
 	const [slideNumber, setSlideNumber] = useState(0)
 	const [open, setOpen] = useState(false)
+	const { data, loading, error} = useFetch(
+		`http://localhost:8800/api/hotels/find/${id}`
+	);
 	const photos = [
 		{
 			src: "https://images.unsplash.com/photo-1521783988139-89397d761dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80"
@@ -46,7 +52,7 @@ const Hotel = () => {
 		<div>
 			<Navbar/>
 			<Header type="list"/>
-			<div className="hotel__container">
+			{loading ? "loading" : <div className="hotel__container">
 				{open && (
 				<div className="slider">
 					<FontAwesomeIcon icon={faCircleXmark} className="close" onClick={() => setOpen(false)}/>
@@ -59,16 +65,16 @@ const Hotel = () => {
 				}
 				<div className="hotel-wrapper">
 					<button className="book-now">Réserver maintenant</button>
-					<h1 className="hotel-title">Grand Hotel</h1>
+					<h1 className="hotel-title">{data.name}</h1>
 					<div className="hotel-address">
 						<FontAwesomeIcon icon={faLocationDot}/>
-						<span>Elton St 125, New-York</span>
+						<span>{data.address}</span>
 					</div>
 					<span className="hotel-distance">
-						Localisation excellente - A 500m du centre-ville
+						Localisation excellente - A {data.distance}m du centre-ville
 					</span>
 					<span className="hotel-price-highlight">
-						Reservez une chambre à partir de 250€ et obtenez le taxi gratuit à partir de l'aéroport !
+						Reservez une chambre à partir de {data.cheapestPrice}€ et obtenez le taxi gratuit à partir de l'aéroport !
 					</span>
 					<div className="hotel-images">
 						{photos.map((photo, i) => {
@@ -81,16 +87,16 @@ const Hotel = () => {
 					</div>
 					<div className="hotel-details">
 						<div className="hotel-details-text">
-							<h1 className="hotel-title">Restez dans le coeur de New-York !</h1>
+							<h1 className="hotel-title">{data.title}</h1>
 							<p className="hotel-desc">
-							Situé à 500 mètres du centre-ville, le Grand Hotel propose un restaurant, un salon, un bar sur le toit ouvert en saison, des chambres avec une connexion Wi-Fi gratuite, ainsi qu'une salle de jeux avec une table de ping-pong. Les chambres du Grand Hotel comprennent la climatisation, un bureau et une télévision par câble. La salle de bains privative est pourvue d'un sèche-cheveux. Certaines chambres offrent une vue magnifique sur la ville. Le restaurant Empellón sur place sert des collations de bar et des tacos dans un cadre classe mais décontracté. Vous savourerez un cocktail au bar-salon sur le toit. De la nourriture et des cocktails sont disponibles au bar-salon du hall, ouvert tous les jours.
+							{data.desc}
 							</p>
 						</div>
 						<div className="hotel-details-price">
 							<h1>Parfait pour un séjour dans la grande ville de New-York</h1>
 							<span>Localisé dans le centre, cet hôtel possède un excellen score de localisation de 9.8 !</span>
 							<h2>
-								<b>1400€</b> <span className="price-nights">(7 nuits)</span>
+								<b>{data.cheapestPrice*7}€</b> <span className="price-nights">(7 nuits)</span>
 							</h2>
 							<button>Réserver maintenant</button>
 						</div>
@@ -98,7 +104,7 @@ const Hotel = () => {
 				</div>
 				<MailList/>
 				<Footer/>
-			</div>
+			</div>}
 		</div>
 	);
 };

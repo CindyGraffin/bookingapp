@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
+import useFetch from "../../hooks/useFetch";
 
 const List = () => {
 	const location = useLocation();
@@ -11,6 +12,16 @@ const List = () => {
 	const [date, setDate] = useState(location.state.date);
 	const [openDate, setOpenDate] = useState(false);
 	const [options, setOptions] = useState(location.state.options);
+	const [min, setMin] = useState(undefined);
+	const [max, setMax] = useState(undefined);
+
+	const { data, loading, error, reFetch } = useFetch(
+		`http://localhost:8800/api/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
+	);
+	console.log(data);
+	const handleClick = () => {
+		reFetch()
+	}
 
 	return (
 		<div>
@@ -22,7 +33,7 @@ const List = () => {
 						<h1 className="list-title">Rechercher</h1>
 						<div className="list-search-item">
 							<label htmlFor="destination">Destination</label>
-							<input type="text" placeholder={destination} />
+							<input type="text" placeholder={destination} onChange={(e) => setDestination(e.target.value)}/>
 						</div>
 						<div className="list-search-item">
 							<label htmlFor="checkIn">Dates de séjour</label>
@@ -56,6 +67,7 @@ const List = () => {
 									type="number"
 									className="list-search-option-input"
 									min={1}
+									onChange={((e) => setMin(e.target.value))}
 								/>
 							</div>
 							<div className="list-search-option-item">
@@ -66,6 +78,7 @@ const List = () => {
 									type="number"
 									className="list-search-option-input"
 									min={1}
+									onChange={((e) => setMax(e.target.value))}
 								/>
 							</div>
 							<div className="list-search-option-item">
@@ -102,18 +115,18 @@ const List = () => {
 								/>
 							</div>
 						</div>
-						<button>Rechercher</button>
+						<button onClick={handleClick}>Rechercher</button>
 					</div>
 					<div className="list-result">
-						<SearchItem/>
-						<SearchItem/>
-						<SearchItem/>
-						<SearchItem/>
-						<SearchItem/>
-						<SearchItem/>
-						<SearchItem/>
-						<SearchItem/>
-						<SearchItem/>
+						{ loading ? "loading" : 
+							(
+								<>
+									{data.map((item) => (
+										<SearchItem item={item} key={item._id}/>
+									))}
+								</>
+							)
+						}
 						<SearchItem/>
 					</div>
 				</div>
