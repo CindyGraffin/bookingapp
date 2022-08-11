@@ -1,10 +1,11 @@
 import "./list.css";
 import { Header, Navbar, SearchItem } from "../../components";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import useFetch from "../../hooks/useFetch";
+import { SearchContext } from "../../context/SearchContext";
 
 const List = () => {
 	const location = useLocation();
@@ -21,6 +22,12 @@ const List = () => {
 	console.log(data);
 	const handleClick = () => {
 		reFetch()
+	}
+	const {dispatch} = useContext(SearchContext)
+	console.log(options)
+	const handleChange = async (e) => {
+		await setOptions({...options, rooms: e.target.value})
+		dispatch({type: "CHANGE_ROOMS", payload: options.rooms})
 	}
 
 	return (
@@ -112,6 +119,7 @@ const List = () => {
 									className="list-search-option-input"
 									placeholder={options.rooms}
 									min={1}
+									onChange={handleChange}
 								/>
 							</div>
 						</div>

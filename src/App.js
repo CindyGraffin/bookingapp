@@ -4,6 +4,7 @@ import {
 	Route
 } from 'react-router-dom';
 import {Home, Hotel, List} from './pages/index';
+import Login from './pages/login/Login';
 
 const App = () => {
 	return (
@@ -11,6 +12,7 @@ const App = () => {
 			<Routes>
 				{/* On définit le premier élément, celui sur lequel on arrive lorsque l'on visite l'appli */}
 				<Route path='/' element={<Home/>}/>
+				<Route path='/login' element={<Login/>}/>
 				<Route path='/hotels' element={<List/>}/>
 				<Route path='/hotels/:id' element={<Hotel/>}/>
 			</Routes>

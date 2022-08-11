@@ -1,9 +1,11 @@
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { faCircleArrowLeft, faCircleArrowRight, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { differenceInCalendarYears } from "date-fns/esm";
+import { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { Navbar, Header, MailList, Footer } from "../../components";
+import { SearchContext } from "../../context/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import './hotel.css';
 
@@ -15,6 +17,17 @@ const Hotel = () => {
 	const { data, loading, error} = useFetch(
 		`http://localhost:8800/api/hotels/find/${id}`
 	);
+	const {date, options} = useContext(SearchContext)
+	console.log(date);
+
+	const millisecondsPerDay = 1000*60*60*24;
+	const dayDifference = (date1, date2) => {
+		const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+		const diffDays = Math.ceil(timeDiff / millisecondsPerDay);
+		return diffDays;
+	}
+	const days = dayDifference(date[0].endDate, date[0].startDate);
+
 	const photos = [
 		{
 			src: "https://images.unsplash.com/photo-1521783988139-89397d761dce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80"
@@ -96,7 +109,7 @@ const Hotel = () => {
 							<h1>Parfait pour un séjour dans la grande ville de New-York</h1>
 							<span>Localisé dans le centre, cet hôtel possède un excellen score de localisation de 9.8 !</span>
 							<h2>
-								<b>{data.cheapestPrice*7}€</b> <span className="price-nights">(7 nuits)</span>
+								<b>{data.cheapestPrice*days*options.rooms}€</b> <span className="price-nights">({days} nuits)</span>
 							</h2>
 							<button>Réserver maintenant</button>
 						</div>
