@@ -1,10 +1,10 @@
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { faCircleArrowLeft, faCircleArrowRight, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { differenceInCalendarYears } from "date-fns/esm";
 import { useState, useContext } from "react";
-import { useLocation } from "react-router-dom";
-import { Navbar, Header, MailList, Footer } from "../../components";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Navbar, Header, MailList, Footer, Reserve } from "../../components";
+import { AuthContext } from "../../context/AuthContext";
 import { SearchContext } from "../../context/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import './hotel.css';
@@ -14,6 +14,7 @@ const Hotel = () => {
 	const id = location.pathname.split('/')[2]
 	const [slideNumber, setSlideNumber] = useState(0)
 	const [open, setOpen] = useState(false)
+	const [openBook, setOpenBook] = useState(false)
 	const { data, loading, error} = useFetch(
 		`http://localhost:8800/api/hotels/find/${id}`
 	);
@@ -27,6 +28,8 @@ const Hotel = () => {
 		return diffDays;
 	}
 	const days = dayDifference(date[0].endDate, date[0].startDate);
+
+	const {user} = useContext(AuthContext)
 
 	const photos = [
 		{
@@ -61,6 +64,14 @@ const Hotel = () => {
 		}
 		setSlideNumber(newSlideIndex)
 	}
+	const navigate = useNavigate()
+	const handleClick = () => {
+		if (user) {
+			setOpenBook(true)
+		} else {
+			navigate('/login')
+		}
+	}
 	return (
 		<div>
 			<Navbar/>
@@ -77,7 +88,7 @@ const Hotel = () => {
 				</div>)
 				}
 				<div className="hotel-wrapper">
-					<button className="book-now">Réserver maintenant</button>
+					<button className="book-now" onClick={handleClick}>Réserver maintenant</button>
 					<h1 className="hotel-title">{data.name}</h1>
 					<div className="hotel-address">
 						<FontAwesomeIcon icon={faLocationDot}/>
@@ -111,13 +122,14 @@ const Hotel = () => {
 							<h2>
 								<b>{data.cheapestPrice*days*options.rooms}€</b> <span className="price-nights">({days} nuits)</span>
 							</h2>
-							<button>Réserver maintenant</button>
+							<button onClick={handleClick}>Réserver maintenant</button>
 						</div>
 					</div>
 				</div>
 				<MailList/>
 				<Footer/>
 			</div>}
+			{openBook && <Reserve setOpenBook={setOpenBook} hotelId={id}/>}
 		</div>
 	);
 };

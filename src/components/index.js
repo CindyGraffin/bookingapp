@@ -6,5 +6,6 @@ import LovedProperties from "./lovedProperties/LovedProperties";
 import MailList from "./mailList/MailList";
 import Footer from "./footer/Footer";
 import SearchItem from "./searchItem/SearchItem";
+import Reserve from "./reserve/Reserve";
 
-export {Header, Navbar, Featured, PropertyList, LovedProperties, MailList, Footer, SearchItem};
+export {Header, Navbar, Featured, PropertyList, LovedProperties, MailList, Footer, SearchItem, Reserve};
